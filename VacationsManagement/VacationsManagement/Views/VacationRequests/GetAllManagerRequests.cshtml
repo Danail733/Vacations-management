@@ -1,0 +1,24 @@
+﻿@model IEnumerable<VacationRequestListingViewModel>
+
+<h2 class="text-center mt-5">Vacation Requests List</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th> Employee Name</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var request in Model)
+        {
+            <tr>
+                <td>@request.StartDate.ToString("yyyy-MM-dd")</td>
+                <td>@request.EndDate.ToString("yyyy-MM-dd")</td>
+                <td>@request.EmpoyeeName</td>
+                <td>@request.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>

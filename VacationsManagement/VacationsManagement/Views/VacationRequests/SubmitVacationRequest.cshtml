@@ -1,0 +1,44 @@
+﻿@section Scripts {
+    <script src="~/lib/fullcalendar/main.js" asp-append-version="true"></script>
+    <script src="~/lib/fullcalendar/interaction/main.js" asp-append-version="true"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['dayGrid'],
+                events: []
+            });
+
+            calendar.render();
+        });
+    </script>
+}
+
+@model SubmitVacationRequestViewModel
+
+<h2 class="text-center">Submit Vacation Request</h2>
+<div class="row">
+<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+<form asp-action="SubmitVacationRequest" method="post">
+
+    <div class="form-group">
+        <label asp-for="StartDate" class="control-label"></label>
+        <input asp-for="StartDate" class="form-control" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mt-3">
+        <label asp-for="EndDate" class="control-label"></label>
+        <input asp-for="EndDate" class="form-control" />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+    </div>
+</form>
+</div>
+</div>
+

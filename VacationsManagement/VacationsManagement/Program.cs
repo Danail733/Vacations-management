@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using VacationsManagement.Data;
 using VacationsManagement.Data.Models;
 using VacationsManagement.Infrastructure;
+using VacationsManagement.Services;
+using VacationsManagement.Services.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,9 @@ builder.Services.AddDefaultIdentity<Employee>(options =>
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<VacationManagementDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IVacationRequestsService, VacationRequestsService>();
 
 var app = builder.Build();
 
