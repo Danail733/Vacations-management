@@ -21,5 +21,7 @@
         public DateTime EndDate { get; set; }
 
         public int DaysRequested { get; set; }
+
+        public string? RejectReason { get; set; }
     }
 }

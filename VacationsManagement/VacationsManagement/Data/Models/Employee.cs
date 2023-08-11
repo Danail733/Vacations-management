@@ -12,7 +12,7 @@ namespace VacationsManagement.Data.Models
 
         public Employee Manager { get; set; }
 
-        public int DefaultCountOfVacationDays { get; set; }
+        public int VacationDays { get; set; }
 
         public IEnumerable<Employee> Employees { get; set; } = new List<Employee>();
 

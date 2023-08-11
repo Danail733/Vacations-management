@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using VacationsManagement.Infrastructure;
 using VacationsManagement.Models.VacationRequests;
-using VacationsManagement.Services;
+using VacationsManagement.Services.VacationRequests;
 
 namespace VacationsManagement.Controllers
 {
@@ -40,15 +40,53 @@ namespace VacationsManagement.Controllers
                 return BadRequest();
             }
 
-            return RedirectToAction("SubmitVacationRequest");
+            return RedirectToAction("GetMyVacationRequests");
         }
 
         [HttpGet]
-        [Authorize(Roles = WebConstanst.managerRoleName)]
+        [Authorize(Roles = WebConstants.managerRoleName)]
         public IActionResult GetAllManagerRequests()
         {
             var managerId = User.Id();
-           var requests = _vacationRequestsService.GetAllManagerRequests(managerId);
+            var requests = _vacationRequestsService.GetAllManagerRequests(managerId);
+
+            return View(requests);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = WebConstants.managerRoleName)]
+        public IActionResult ApproveVacationRequest(int requestId)
+        {
+            var result =_vacationRequestsService.ApproveVacationRequest(requestId);
+
+            if(result == -1)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction("GetAllManagerRequests");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = WebConstants.managerRoleName)]
+        public IActionResult RejectVacationRequest(int requestId, string rejectReason)
+        {
+            var result = _vacationRequestsService.RejectVacationRequest(requestId, rejectReason);
+
+            if (result == -1)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction("GetAllManagerRequests");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult GetMyVacationRequests()
+        {
+            var userId = User.Id();
+            var requests = _vacationRequestsService.GetMyRequests(userId);
 
             return View(requests);
         }

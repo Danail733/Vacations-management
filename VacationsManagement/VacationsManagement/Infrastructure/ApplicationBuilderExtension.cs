@@ -58,14 +58,14 @@ namespace VacationsManagement.Infrastructure
                     Email = "manager@vacationsManagement.com",
                     FirstName = "Manager",
                     LastName = "Manager",
-                    DefaultCountOfVacationDays = 20,
+                    VacationDays = 20,
                 };
 
                 await userManager.CreateAsync(manager, "Parola123");
 
-                if (await roleManager.RoleExistsAsync(WebConstanst.managerRoleName))
+                if (await roleManager.RoleExistsAsync(WebConstants.managerRoleName))
                 {
-                    await userManager.AddToRoleAsync(manager, WebConstanst.managerRoleName);           
+                    await userManager.AddToRoleAsync(manager, WebConstants.managerRoleName);           
                 }
 
                 var employee = new Employee
@@ -74,7 +74,7 @@ namespace VacationsManagement.Infrastructure
                     Email = "employee@vacationsManagement.com",
                     FirstName = "Employee",
                     LastName = "Employee",
-                    DefaultCountOfVacationDays = 20,
+                    VacationDays = 20,
                     ManagerId = manager.Id
                 };
 
@@ -88,11 +88,11 @@ namespace VacationsManagement.Infrastructure
         {
             Task.Run(async () =>
             {
-                if (await roleManager.RoleExistsAsync(WebConstanst.managerRoleName))
+                if (await roleManager.RoleExistsAsync(WebConstants.managerRoleName))
                 {
                     return;
                 }
-                var role = new IdentityRole { Name = WebConstanst.managerRoleName };
+                var role = new IdentityRole { Name = WebConstants.managerRoleName };
 
                 await roleManager.CreateAsync(role);
             })

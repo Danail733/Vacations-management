@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VacationsManagement.Data;
 
@@ -11,9 +12,10 @@ using VacationsManagement.Data;
 namespace VacationsManagement.Data.Migrations
 {
     [DbContext(typeof(VacationManagementDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230811130510_RenameDefaultVacationDaysColumnAndAddRejectReasonInVacationModel")]
+    partial class RenameDefaultVacationDaysColumnAndAddRejectReasonInVacationModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

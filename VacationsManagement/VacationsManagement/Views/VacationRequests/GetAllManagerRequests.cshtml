@@ -8,6 +8,7 @@
             <th>End Date</th>
             <th> Employee Name</th>
             <th>Status</th>
+            <th>Days</th>
         </tr>
     </thead>
     <tbody>
@@ -18,7 +19,56 @@
                 <td>@request.EndDate.ToString("yyyy-MM-dd")</td>
                 <td>@request.EmpoyeeName</td>
                 <td>@request.Status</td>
+                <td>@request.Vacationdays</td>
+                <td>
+                    <form id="editForm_" asp-controller="VacationRequests" asp-action="ApproveVacationRequest" method="post">
+                        <input type="hidden" name="requestId" value="@request.Id" />
+                        <button type="button" onclick="submitApproveForm(@request.Id)" class="btn btn-success">Approve</button>
+                    </form>
+                </td>
+
+                <td>
+                    <form asp-controller="VacationRequests" asp-action="RejectVacationRequest" method="post">
+                        <input type="hidden" name="requestId" value="@request.Id" />
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#rejectionModal_@request.Id">
+                            Reject
+                        </button>
+                    </form>
+
+                    <div class="modal fade" id="rejectionModal_@request.Id" tabindex="-1" role="dialog" aria-labelledby="rejectionModalLabel_@request.Id" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="rejectionModalLabel_@request.Id">Reject Request</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form asp-controller="VacationRequests" asp-action="RejectVacationRequest" method="post">
+                                        <input type="hidden" name="requestId" value="@request.Id" />
+                                        <div class="form-group">
+                                            <label for="rejectionReason_@request.Id">Rejection Reason:</label>
+                                            <textarea id="rejectionReason_@request.Id" name="rejectReason" class="form-control" rows="4"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-danger mt-2">Reject</button>
+                                        <button type="button" class="btn btn-secondary mt-2" data-bs-dismiss="modal">Close</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+<script>
+    function submitApproveForm(id) {
+        var form = document.getElementById("editForm_");
+        if (form) {
+            form.submit();
+        }
+    }
+</script>

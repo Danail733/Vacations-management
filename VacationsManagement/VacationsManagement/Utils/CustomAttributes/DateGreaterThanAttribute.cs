@@ -22,7 +22,7 @@ namespace VacationsManagement.Utils.CustomAttributes
 
             var comparisonValue = (DateTime?)property.GetValue(validationContext.ObjectInstance);
 
-            if (value != null && comparisonValue != null && (DateTime)value <= comparisonValue)
+            if (value != null && comparisonValue != null && (DateTime)value < comparisonValue)
             {
                 return new ValidationResult(ErrorMessage);
             }

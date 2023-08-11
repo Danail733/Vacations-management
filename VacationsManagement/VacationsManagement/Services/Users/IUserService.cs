@@ -1,4 +1,6 @@
-﻿namespace VacationsManagement.Services.Users
+﻿using VacationsManagement.Models.Users;
+
+namespace VacationsManagement.Services.Users
 {
     public interface IUserService
     {
@@ -7,5 +9,7 @@
         public string GetManagerIdByUserId(string userId);
 
         public int UpdateVacationDaysByUserId(string userId, int daysToSubtract);
+
+        public UserInfoViewModel GetUserInfo(string userId);
     }
 }

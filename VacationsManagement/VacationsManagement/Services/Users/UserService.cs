@@ -1,4 +1,6 @@
-﻿using VacationsManagement.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using VacationsManagement.Data;
+using VacationsManagement.Models.Users;
 
 namespace VacationsManagement.Services.Users
 {
@@ -13,7 +15,7 @@ namespace VacationsManagement.Services.Users
 
         public int GetVacationDaysByUserId(string userId)
         {
-            return _context.Employees.FirstOrDefault(x => x.Id == userId).DefaultCountOfVacationDays;
+            return _context.Employees.FirstOrDefault(x => x.Id == userId).VacationDays;
         }
 
         public string GetManagerIdByUserId(string userId)
@@ -30,11 +32,26 @@ namespace VacationsManagement.Services.Users
                 return -1;
             }
 
-            user.DefaultCountOfVacationDays = user.DefaultCountOfVacationDays - daysToSubtract;
+            user.VacationDays = user.VacationDays - daysToSubtract;
 
             _context.SaveChanges();
 
-            return user.DefaultCountOfVacationDays;
+            return user.VacationDays;
+        }
+
+        public UserInfoViewModel GetUserInfo(string userId)
+        {
+            var user = _context.Employees.Include(x => x.Manager)
+                .FirstOrDefault(x => x.Id == userId);
+
+            var result = new UserInfoViewModel
+            {
+                Email = user.Email,
+                ManagerName = user.Manager.FirstName + " " + user.Manager.LastName,
+                VacationDays = user.VacationDays
+            };
+
+            return result;
         }
 
     }

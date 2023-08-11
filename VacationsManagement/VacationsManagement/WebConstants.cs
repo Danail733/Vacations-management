@@ -1,6 +1,6 @@
 ﻿namespace VacationsManagement
 {
-    public class WebConstanst
+    public class WebConstants
     {
         public const string managerRoleName = "Manager";
     }

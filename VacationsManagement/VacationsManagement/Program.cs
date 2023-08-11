@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using VacationsManagement.Data;
 using VacationsManagement.Data.Models;
 using VacationsManagement.Infrastructure;
-using VacationsManagement.Services;
 using VacationsManagement.Services.Users;
+using VacationsManagement.Services.VacationRequests;
 
 var builder = WebApplication.CreateBuilder(args);
 
