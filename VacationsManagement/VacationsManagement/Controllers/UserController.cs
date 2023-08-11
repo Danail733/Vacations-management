@@ -19,9 +19,9 @@ namespace VacationsManagement.Controllers
         {
             var userId = User.Id();
 
-            var result = _userService.GetUserInfo(userId);
+            var userInfo = _userService.GetUserInfo(userId);
 
-            return View(result);
+            return View(userInfo);
         }
     }
 }
